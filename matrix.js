@@ -1,4 +1,6 @@
-let Matrix = class Matrix {
+'use strict';
+
+const Matrix = class Matrix {
   constructor(dimension) {
     this.dimension = dimension;
     this.matrix = zerosMatrix(this.dimension);
@@ -11,27 +13,27 @@ let Matrix = class Matrix {
     this.matrix = zeroDiagonal(this.matrix);
     return this;
   }
-  symetric(){
+  symetric() {
     this.matrix = symetric(this.matrix);
     return this;
   }
-  transp(){
+  transp() {
     this.matrix = transMatrix(this.matrix);
     return this;
   }
-  multi(num){
+  multi(num) {
     this.matrix = multMatrix(num, this.matrix);
     return this;
   }
-  multiply(B){
-    let result = multiplyMatrix(this.matrix, B.matrix);
+  multiply(B) {
+    const result = multiplyMatrix(this.matrix, B.matrix);
     return result;
   }
-  pow(n){
+  pow(n) {
     this.matrix = matrixPow(n, this.matrix);
     return this;
   }
-}
+};
 
 //Get random number
 function getRandom(min, max) {
@@ -40,7 +42,7 @@ function getRandom(min, max) {
 
 //Creating random square matrix
 function weightMatrix(dimensionOfMatrix) {
-  let matrix = [];
+  const matrix = [];
   for (let i = 0; i < dimensionOfMatrix; i++) {
     const row = [];
     for (let j = 0; j < dimensionOfMatrix; j++) {
@@ -51,7 +53,6 @@ function weightMatrix(dimensionOfMatrix) {
   }
   return matrix;
 }
-
 
 //Function that puts zeros diagonally
 function zeroDiagonal(matrix) {
@@ -93,46 +94,49 @@ function zerosMatrix(dimensionOfMatrix) {
 
 //Function for transponation matrix
 function transMatrix(matrix) {
-    let m = matrix.length, n = matrix[0].length, transpMatrix = [];
-    for (let i = 0; i < n; i++)
-     { transpMatrix[ i ] = [];
-       for (let j = 0; j < m; j++) transpMatrix[ i ][j] = matrix[j][ i ];
-     }
-    return transpMatrix;
+  const m = matrix.length,
+        n = matrix[0].length,
+        transpMatrix = [];
+  for (let i = 0; i < n; i++) {
+    transpMatrix[i] = [];
+    for (let j = 0; j < m; j++) transpMatrix[i][j] = matrix[j][i];
+  }
+  return transpMatrix;
 }
 
 //Function to multiply by number
-function multMatrix(num,A) {
-    let m = A.length, n = A[0].length, B = [];
-    for (let i = 0; i < m; i++)
-     { B[ i ] = [];
-       for (let j = 0; j < n; j++) B[ i ][j] = num*A[ i ][j];
-     }
-    return B;
+function multMatrix(num, A) {
+  const m = A.length,
+        n = A[0].length,
+        B = [];
+  for (let i = 0; i < m; i++) {
+    B[i] = [];
+    for (let j = 0; j < n; j++) B[i][j] = num * A[i][j];
+  }
+  return B;
 }
 
-function multiplyMatrix(A, B)
-{
-    let rowsA = A.length, colsA = A[0].length,
-        rowsB = B.length, colsB = B[0].length,
+function multiplyMatrix(A, B) {
+  const rowsA = A.length,
+        colsA = A[0].length,
+        rowsB = B.length,
+        colsB = B[0].length,
         C = [];
-    if (colsA != rowsB) return false;
-    for (var i = 0; i < rowsA; i++) C[ i ] = [];
-    for (var k = 0; k < colsB; k++)
-     { for (var i = 0; i < rowsA; i++)
-        { var t = 0;
-          for (var j = 0; j < rowsB; j++) t += A[ i ][j]*B[j][k];
-          C[ i ][k] = t;
-        }
-     }
-    return C;
+  if (colsA !== rowsB) return false;
+  for (let j = 0; j < rowsA; j++) C[j] = [];
+  for (let k = 0; k < colsB; k++) {
+    for (let i = 0; i < rowsA; i++) {
+      let t = 0;
+      for (let j = 0; j < rowsB; j++) t += A[i][j] * B[j][k];
+      C[i][k] = t;
+    }
+  }
+  return C;
 }
 
-function matrixPow(n,A) {
-    if (n == 1) return A;
-    else return multiplyMatrix(A, matrixPow(n-1,A) );
+function matrixPow(n, A) {
+  if (n === 1) return A;
+  else return multiplyMatrix(A, matrixPow(n - 1, A));
 }
-
-
 
 module.exports = Matrix;

@@ -2,7 +2,7 @@
 
 //connect  input module
 const readlineSync = require('readline-sync');
-const Matrix = require('./matrix.js')
+const Matrix = require('./matrix.js');
 
 //input validation function
 function inputDataChecker() {
@@ -101,14 +101,26 @@ const dimensionMatrix = inputDataChecker();
 const dimensionBigMatrix = dimensionMatrix * 2;
 
 const matrixGraph = new Matrix(dimensionMatrix);
-  matrixGraph.fillWeight().symetric().zerosDiagonal();
+matrixGraph
+  .fillWeight()
+  .symetric()
+  .zerosDiagonal();
 const secondMatrix = new Matrix(dimensionMatrix);
-  secondMatrix.fillWeight().symetric().zerosDiagonal();
+secondMatrix
+  .fillWeight()
+  .symetric()
+  .zerosDiagonal();
 
 const bigMatrixGraph = new Matrix(dimensionBigMatrix);
-  bigMatrixGraph.fillWeight().symetric().zerosDiagonal();
+bigMatrixGraph
+  .fillWeight()
+  .symetric()
+  .zerosDiagonal();
 const bigMatrixSecondGraph = new Matrix(dimensionBigMatrix);
-  bigMatrixSecondGraph.fillWeight().symetric().zerosDiagonal();
+bigMatrixSecondGraph
+  .fillWeight()
+  .symetric()
+  .zerosDiagonal();
 
 // console.log('First matrix: \n')
 // console.log(firstMatrixGraph.matrix);
@@ -141,6 +153,8 @@ console.log(`Running time for second graph: ${secondTime}ms`);
 // console.log(bigBaseMatrix.matrix);
 console.log(`Running time for big graph: ${bigMatrixTime}ms`);
 
-[secondBaseBigMatrix, bigMatrixSecondTime] = timeTester(bigMatrixSecondGraph.matrix);
+[secondBaseBigMatrix, bigMatrixSecondTime] = timeTester(
+  bigMatrixSecondGraph.matrix
+);
 // console.log(secondBaseBigMatrix.matrix);
 console.log(`Running time for second big graph: ${bigMatrixSecondTime}ms`);
