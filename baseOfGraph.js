@@ -50,7 +50,6 @@ function baseBuilderKraskal(edges, matrixSize) {
   const base = new Matrix(matrixSize);
   const passedNodes = {};
   while (Object.keys(passedNodes).length < matrixSize) {
-    edges = edges.filter(() => true);
     const edge = edges.shift();
     const start = edge.start;
     const end = edge.end;
@@ -65,7 +64,7 @@ function baseBuilderKraskal(edges, matrixSize) {
       const currentStart = currentEdge.start;
       const currentEnd = currentEdge.end;
       if (passedNodes[currentStart] === 1 && passedNodes[currentEnd] === 1) {
-        delete edges[i];
+        edges.splice(i, 1);
       }
     }
   }
