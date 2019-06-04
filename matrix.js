@@ -18,7 +18,7 @@ const Matrix = class Matrix {
     return this;
   }
   transp() {
-    this.matrix = transMatrix(this.matrix);
+    this.matrix = transpose(this.matrix);
     return this;
   }
   multi(num) {
@@ -57,15 +57,9 @@ function weightMatrix(dimensionOfMatrix) {
 //Function that puts zeros diagonally
 function zeroDiagonal(matrix) {
   const newMatrix = matrix;
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = 0; j < matrix.length; j++) {
-      if (i === j) {
-        const currentRow = newMatrix[i];
-        currentRow[j] = 0;
-        newMatrix[i] = currentRow;
+    for (let i = 0; i < matrix.length; i++) {
+        newMatrix[i][i] = 0;
       }
-    }
-  }
   return newMatrix;
 }
 
@@ -84,31 +78,21 @@ function symetric(inputMatrix) {
 
 //Creating empty matrix
 function zerosMatrix(dimensionOfMatrix) {
-  const zeroMatrix = [];
-  for (let i = 0; i < dimensionOfMatrix; i++) {
-    const row = new Array(dimensionOfMatrix).fill(0);
-    zeroMatrix.push(row);
-  }
+  const zeroMatrix = Array(dimensionOfMatrix)
+    .fill(Array(dimensionOfMatrix)
+    .fill(0))
+    .map(a => a.slice())
   return zeroMatrix;
 }
 
 //Function for transponation matrix
-function transMatrix(matrix) {
-  const m = matrix.length,
-        n = matrix[0].length,
-        transpMatrix = [];
-  for (let i = 0; i < n; i++) {
-    transpMatrix[i] = [];
-    for (let j = 0; j < m; j++) transpMatrix[i][j] = matrix[j][i];
-  }
-  return transpMatrix;
-}
+const transpose = m => m[0].map((x,i) => m.map(x => x[i]))
 
 //Function to multiply by number
 function multMatrix(num, A) {
-  const m = A.length,
-        n = A[0].length,
-        B = [];
+  const m = A.length;
+  const n = A[0].length;
+  const B = [];
   for (let i = 0; i < m; i++) {
     B[i] = [];
     for (let j = 0; j < n; j++) B[i][j] = num * A[i][j];
