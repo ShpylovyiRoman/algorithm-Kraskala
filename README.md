@@ -1,3 +1,3 @@
-# algorithm-
+# Matrix facade
 
-Expect in soon
+Expect full readme in soon
