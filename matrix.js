@@ -39,6 +39,17 @@ function symetric(inputMatrix) {
   return symetricMatrix;
 }
 
+// function symetric(inputMatrix) {
+//   const symetricMatrix = inputMatrix;
+//   for (let i = 0; i < symetricMatrix.length; i++) {
+//     let row = symetricMatrix[i];
+//     for (let j=i; j<symetricMatrix.length; j++){
+//       symetricMatrix[j][i]=row[j]
+//     }
+//   }
+//   return symetricMatrix;
+// }
+
 //Creating empty matrix
 function zerosMatrix(dimensionOfMatrix) {
   const zeroMatrix = Array(dimensionOfMatrix)
