@@ -61,9 +61,10 @@ function baseBuilderKraskal(edges, matrixSize) {
     base.matrix[start] = row;
     for (let i = 0; i < edges.length; i++) {
       const currentEdge = edges[i];
-      const currentStart = currentEdge.start;
-      const currentEnd = currentEdge.end;
-      if (passedNodes[currentStart] === 1 && passedNodes[currentEnd] === 1) {
+      if (
+        passedNodes[currentEdge.start] === 1 &&
+        passedNodes[currentEdge.end] === 1
+      ) {
         edges.splice(i, 1);
       }
     }
