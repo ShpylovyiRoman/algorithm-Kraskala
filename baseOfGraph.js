@@ -1,17 +1,17 @@
-'use strict';
+"use strict";
 
 //connect  input module
-const readlineSync = require('readline-sync');
-const Matrix = require('./matrix.js');
+const readlineSync = require("readline-sync");
+const Matrix = require("./matrix.js");
 
 //input validation function
 function inputDataChecker() {
   let inputNumber = readlineSync.question(
-    'How many nodes your graph will have? \n'
+    "How many nodes your graph will have? \n"
   );
   inputNumber = Number(inputNumber);
-  if (typeof inputNumber === 'number' && inputNumber > 1) return inputNumber;
-  console.log('Invalid input, please enter number above one. ');
+  if (typeof inputNumber === "number" && inputNumber > 1) return inputNumber;
+  console.log("Invalid input, please enter number above one. ");
   return inputDataChecker();
 }
 
@@ -83,7 +83,6 @@ function algorithmKraskal(weightMatrix) {
   return baseMatrix;
 }
 
-
 //Usage
 const dimensionMatrix = inputDataChecker();
 const matrixGraph = new Matrix(dimensionMatrix);
@@ -92,9 +91,8 @@ matrixGraph
   .symetric()
   .zerosDiagonal();
 
-
-console.log(matrixGraph.matrix)
+console.log(matrixGraph.matrix);
 const baseOfGraph = algorithmKraskal(matrixGraph.matrix);
-console.log(baseOfGraph.matrix)
+console.log(baseOfGraph.matrix);
 
 module.exports = algorithmKraskal;
