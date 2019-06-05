@@ -1,64 +1,36 @@
-'use strict'
+"use strict";
+const Matrix = require("./matrix.js");
+const algorithmKraskal = require("./baseOfGraph.js");
 
+//Function for finding lead time
+function timeTester(matrix, times) {
+  const startTest = new Date().getTime();
+  let sumTime = 0;
+  for (let i = 1; i <= times; i++) {
+    const start = new Date().getTime();
+    const baseOfGraph = algorithmKraskal(matrix);
+    const end = new Date().getTime();
+    const runningTime = end - start;
+    console.log(`Run #${i}: ${runningTime}ms`);
+    sumTime = sumTime + runningTime;
+  }
+  const endTest = new Date().getTime();
+  const testTime = endTest - startTest;
+  const averageTime = sumTime / times;
+  console.log(`Average time for one iteration: ${averageTime}ms`);
+  return testTime;
+}
+module.exports = timeTester;
 
-const dimensionMatrix = 50;
-const dimensionBigMatrix = dimensionMatrix * 2;
+// //Usage
+const dimensionMatrix = 150;
+const times = 100;
 
 const matrixGraph = new Matrix(dimensionMatrix);
 matrixGraph
   .fillWeight()
   .symetric()
   .zerosDiagonal();
-const secondMatrix = new Matrix(dimensionMatrix);
-secondMatrix
-  .fillWeight()
-  .symetric()
-  .zerosDiagonal();
 
-const bigMatrixGraph = new Matrix(dimensionBigMatrix);
-bigMatrixGraph
-  .fillWeight()
-  .symetric()
-  .zerosDiagonal();
-const bigMatrixSecondGraph = new Matrix(dimensionBigMatrix);
-bigMatrixSecondGraph
-  .fillWeight()
-  .symetric()
-  .zerosDiagonal();
-
-// console.log('First matrix: \n')
-// console.log(firstMatrixGraph.matrix);
-// console.log('Second matrix: \n')
-// console.log(secondMatrix.matrix);
-// console.log('First big matrix: \n')
-// console.log(bigMatrixGraph.matrix);
-// console.log('Second big matrix: \n')
-// console.log(bigMatrixSecondGraph.matrix);
-
-//Finding lead time
-let baseMatrix,
-    firstTime,
-    secondBaseMatrix,
-    secondTime,
-    bigBaseMatrix,
-    bigMatrixTime,
-    secondBaseBigMatrix,
-    bigMatrixSecondTime;
-
-[baseMatrix, firstTime] = timeTester(matrixGraph.matrix);
-// console.log(baseMatrix.matrix);
-console.log(`Running time for first graph: ${firstTime}ms`);
-
-[secondBaseMatrix, secondTime] = timeTester(secondMatrix.matrix);
-// console.log(secondBaseMatrix.matrix);
-console.log(`Running time for second graph: ${secondTime}ms`);
-
-[bigBaseMatrix, bigMatrixTime] = timeTester(bigMatrixGraph.matrix);
-// console.log(bigBaseMatrix.matrix);
-console.log(`Running time for big graph: ${bigMatrixTime}ms`);
-
-[secondBaseBigMatrix, bigMatrixSecondTime] = timeTester(
-  bigMatrixSecondGraph.matrix
-);
-// console.log(secondBaseBigMatrix.matrix);
-console.log(`Running time for second big graph: ${bigMatrixSecondTime}ms`);
+const result = timeTester(matrixGraph.matrix, times);
+console.log(`Time for 100 iterations of the function: ${result}ms`);
