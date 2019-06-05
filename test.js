@@ -1,6 +1,6 @@
-"use strict";
-const Matrix = require("./matrix.js");
-const algorithmKraskal = require("./baseOfGraph.js");
+'use strict';
+const Matrix = require('./matrix.js');
+const algorithmKraskal = require('./baseOfGraph.js');
 
 //Function for finding lead time
 function timeTester(matrix, times) {
@@ -12,7 +12,7 @@ function timeTester(matrix, times) {
     const end = new Date().getTime();
     const runningTime = end - start;
     console.log(`Run #${i}: ${runningTime}ms`);
-    sumTime = sumTime + runningTime;
+    sumTime += runningTime;
   }
   const endTest = new Date().getTime();
   const testTime = endTest - startTest;

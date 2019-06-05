@@ -1,35 +1,4 @@
-"use strict";
-
-const Matrix = class Matrix {
-  constructor(dimension) {
-    this.dimension = dimension;
-    this.matrix = zerosMatrix(this.dimension);
-  }
-  fillWeight() {
-    this.matrix = weightMatrix(this.dimension);
-    return this;
-  }
-  zerosDiagonal() {
-    this.matrix = zeroDiagonal(this.matrix);
-    return this;
-  }
-  symetric() {
-    this.matrix = symetric(this.matrix);
-    return this;
-  }
-  transp() {
-    this.matrix = transpose(this.matrix);
-    return this;
-  }
-  multiply(B) {
-    const result = multiplyMatrix(this.matrix, B.matrix);
-    return result;
-  }
-  pow(n) {
-    this.matrix = matrixPow(n, this.matrix);
-    return this;
-  }
-};
+'use strict';
 
 //Get random number
 function getRandom(min, max) {
@@ -104,5 +73,36 @@ function matrixPow(n, matrix) {
   if (n === 1) return matrix;
   return multiplyMatrix(matrix, matrixPow(n - 1, matrix));
 }
+
+const Matrix = class Matrix {
+  constructor(dimension) {
+    this.dimension = dimension;
+    this.matrix = zerosMatrix(this.dimension);
+  }
+  fillWeight() {
+    this.matrix = weightMatrix(this.dimension);
+    return this;
+  }
+  zerosDiagonal() {
+    this.matrix = zeroDiagonal(this.matrix);
+    return this;
+  }
+  symetric() {
+    this.matrix = symetric(this.matrix);
+    return this;
+  }
+  transp() {
+    this.matrix = transpose(this.matrix);
+    return this;
+  }
+  multiply(B) {
+    const result = multiplyMatrix(this.matrix, B.matrix);
+    return result;
+  }
+  pow(n) {
+    this.matrix = matrixPow(n, this.matrix);
+    return this;
+  }
+};
 
 module.exports = Matrix;
