@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const Matrix = class Matrix {
   constructor(dimension) {
@@ -21,10 +21,6 @@ const Matrix = class Matrix {
     this.matrix = transpose(this.matrix);
     return this;
   }
-  multi(num) {
-    this.matrix = multMatrix(num, this.matrix);
-    return this;
-  }
   multiply(B) {
     const result = multiplyMatrix(this.matrix, B.matrix);
     return result;
@@ -44,10 +40,10 @@ function getRandom(min, max) {
 function weightMatrix(dimensionOfMatrix) {
   const matrix = [];
   for (let i = 0; i < dimensionOfMatrix; i++) {
-    const row = [];
+    const row = new Uint8Array(dimensionOfMatrix);
     for (let j = 0; j < dimensionOfMatrix; j++) {
       const random = getRandom(10, 99);
-      row.push(random);
+      row[j] = random;
     }
     matrix.push(row);
   }
@@ -57,20 +53,18 @@ function weightMatrix(dimensionOfMatrix) {
 //Function that puts zeros diagonally
 function zeroDiagonal(matrix) {
   const newMatrix = matrix;
-    for (let i = 0; i < matrix.length; i++) {
-        newMatrix[i][i] = 0;
-      }
+  for (let i = 0; i < matrix.length; i++) {
+    newMatrix[i][i] = 0;
+  }
   return newMatrix;
 }
 
 //Function that make symetric matrix
 function symetric(inputMatrix) {
   const symetricMatrix = inputMatrix;
-  for (let i = 0; i < symetricMatrix.length; i++) {
+  for (let i = 1; i < symetricMatrix.length - 1; i++) {
     for (let j = 0; j < symetricMatrix.length; j++) {
-      if (symetricMatrix[i][j] !== symetricMatrix[j][i]) {
-        symetricMatrix[i][j] = symetricMatrix[j][i];
-      }
+      symetricMatrix[i][j] = symetricMatrix[j][i];
     }
   }
   return symetricMatrix;
@@ -79,35 +73,23 @@ function symetric(inputMatrix) {
 //Creating empty matrix
 function zerosMatrix(dimensionOfMatrix) {
   const zeroMatrix = Array(dimensionOfMatrix)
-    .fill(Array(dimensionOfMatrix)
-    .fill(0))
-    .map(a => a.slice())
+    .fill(new Uint8Array(dimensionOfMatrix))
+    .map(a => a.slice());
   return zeroMatrix;
 }
 
 //Function for transponation matrix
-const transpose = m => m[0].map((x,i) => m.map(x => x[i]))
+const transpose = m => m[0].map((x, i) => m.map(x => x[i]));
 
-//Function to multiply by number
-function multMatrix(num, A) {
-  const m = A.length;
-  const n = A[0].length;
-  const B = [];
-  for (let i = 0; i < m; i++) {
-    B[i] = [];
-    for (let j = 0; j < n; j++) B[i][j] = num * A[i][j];
-  }
-  return B;
-}
-
+//Function for multiply two matrixes
 function multiplyMatrix(A, B) {
-  const rowsA = A.length,
-        colsA = A[0].length,
-        rowsB = B.length,
-        colsB = B[0].length,
-        C = [];
+  const rowsA = A.length;
+  const colsA = A[0].length;
+  const rowsB = B.length;
+  const colsB = B[0].length;
+  const C = [];
   if (colsA !== rowsB) return false;
-  for (let j = 0; j < rowsA; j++) C[j] = [];
+  for (let j = 0; j < rowsA; j++) C[j] = new Uint8Array(rowsA);
   for (let k = 0; k < colsB; k++) {
     for (let i = 0; i < rowsA; i++) {
       let t = 0;
@@ -118,9 +100,9 @@ function multiplyMatrix(A, B) {
   return C;
 }
 
-function matrixPow(n, A) {
-  if (n === 1) return A;
-  else return multiplyMatrix(A, matrixPow(n - 1, A));
+function matrixPow(n, matrix) {
+  if (n === 1) return matrix;
+  return multiplyMatrix(matrix, matrixPow(n - 1, matrix));
 }
 
 module.exports = Matrix;
