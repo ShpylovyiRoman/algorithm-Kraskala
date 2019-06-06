@@ -8,7 +8,7 @@ function timeTester(matrix, times) {
   let sumTime = 0;
   for (let i = 1; i <= times; i++) {
     const start = new Date().getTime();
-    const baseOfGraph = algorithmKraskal(matrix);
+    algorithmKraskal(matrix);
     const end = new Date().getTime();
     const runningTime = end - start;
     sumTime = sumTime + runningTime;
