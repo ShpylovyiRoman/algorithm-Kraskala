@@ -11,8 +11,7 @@ function timeTester(matrix, times) {
     const baseOfGraph = algorithmKraskal(matrix);
     const end = new Date().getTime();
     const runningTime = end - start;
-    console.log(`Run #${i}: ${runningTime}ms`);
-    sumTime += runningTime;
+    sumTime = sumTime + runningTime;
   }
   const endTest = new Date().getTime();
   const testTime = endTest - startTest;
