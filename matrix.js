@@ -31,24 +31,27 @@ function zeroDiagonal(matrix) {
 //Function that make symetric matrix
 function symetric(inputMatrix) {
   const symetricMatrix = inputMatrix;
-  for (let i = 1; i < symetricMatrix.length - 1; i++) {
-    for (let j = 0; j < symetricMatrix.length; j++) {
-      symetricMatrix[i][j] = symetricMatrix[j][i];
+  for (let i = 0; i < symetricMatrix.length; i++) {
+    let row = symetricMatrix[i];
+    for (let j=i; j<symetricMatrix.length; j++){
+      symetricMatrix[j][i]=row[j]
     }
   }
   return symetricMatrix;
 }
 
+
 // function symetric(inputMatrix) {
 //   const symetricMatrix = inputMatrix;
-//   for (let i = 0; i < symetricMatrix.length; i++) {
-//     let row = symetricMatrix[i];
-//     for (let j=i; j<symetricMatrix.length; j++){
-//       symetricMatrix[j][i]=row[j]
+//   for (let i = 1; i < symetricMatrix.length - 1; i++) {
+//     for (let j = 0; j < symetricMatrix.length; j++) {
+//       symetricMatrix[i][j] = symetricMatrix[j][i];
 //     }
 //   }
 //   return symetricMatrix;
 // }
+
+
 
 //Creating empty matrix
 function zerosMatrix(dimensionOfMatrix) {
